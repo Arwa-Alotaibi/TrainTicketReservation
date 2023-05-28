@@ -7,7 +7,6 @@ Train Ticket Reservation is a project that allows passengers to book train ticke
 * Java Spring Boot
 *  MySQL
 * REST APIs
-* Junit for testing
 
 ## Features:
 The Reservation system should contain the following features:
