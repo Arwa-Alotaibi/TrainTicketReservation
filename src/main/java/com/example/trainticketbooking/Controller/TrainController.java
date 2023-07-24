@@ -5,9 +5,11 @@ import com.example.trainticketbooking.Model.Train;
 import com.example.trainticketbooking.Service.TrainService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -45,6 +47,7 @@ public class TrainController {
     public ResponseEntity GetAvailable_Seats(@PathVariable Integer train_id){
         return ResponseEntity.status(200).body("The number of seats available:"+" "+ trainService.Available_Seats(train_id));
     }
+
 
 
 

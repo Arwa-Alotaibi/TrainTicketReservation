@@ -8,6 +8,7 @@ import com.example.trainticketbooking.Repository.StaffRepository;
 import com.example.trainticketbooking.Repository.TrainRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -64,8 +65,10 @@ public class TrainService {
         trainRepository.delete(delete_train);
     }
 
-    public int Available_Seats(Integer id){
-        Train train= trainRepository.findTrainById(id);
+
+    //Checking for availability of seats in the train.
+    public int Available_Seats(Integer train_id){
+        Train train= trainRepository.findTrainById(train_id);
         int seat = train.getAvailable_seats();
         if(train==null){
             throw new ApiException("train id not found !!");
@@ -77,6 +80,11 @@ public class TrainService {
         return seat;
 
 }
+
+
+
+
+
 
 
 

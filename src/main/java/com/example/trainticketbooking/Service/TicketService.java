@@ -38,8 +38,8 @@ public class TicketService {
             throw new ApiException("The train is not available");
         } else if (!ticket.getStarting_location().equals(train.getStarting_location())&& !ticket.getDestination().equals(train.getDestination())) {
             throw new ApiException("Sorry try another id!!");
-        } else if (train.getAvailable_seats()<ticket.getPassenger()) {
-            throw new ApiException("Sorry ,The number of passengers is more than the number of seats...\n");
+        }  else if (train.getAvailable_seats()<ticket.getPassenger()) {
+            throw new ApiException("Sorry ,The number of passengers is more than the number of seats...");
         }
         ticket.setTicket_cost(train.getTrain_fare()* ticket.getPassenger());
         if(ticket.getTicket_cost()>user.getBalance()){
@@ -49,6 +49,7 @@ public class TicketService {
         user.setBalance(user.getBalance()-ticket.getTicket_cost());
         ticket.setTrain(train);
         ticket.setUser(user);
+
         ticketRepository.save(ticket);
     }
     // update booking
@@ -82,7 +83,11 @@ public class TicketService {
         }
        ticket.getTrain().setAvailable_seats(ticket.getTrain().getAvailable_seats()+ticket.getPassenger()) ;
         user.setBalance(user.getBalance()+ticket.getTicket_cost());
-        ticketRepository.delete(ticket);
+        ticket.getUser().getTicketList().remove(ticket);
+       ticketRepository.save(ticket);
+       userRepository.save(user);
+
+        //ticketRepository.delete(ticket);
 
     }
 
